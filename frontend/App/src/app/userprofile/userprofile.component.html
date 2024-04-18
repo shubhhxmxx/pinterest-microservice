@@ -1,0 +1,132 @@
+<div class="container">
+    <div class="row">
+        <div class="center">
+            <div class="profile-img">
+                <img [src]="'data:image/jpeg;base64,'+ user.profilePic" alt="">
+            </div>
+        </div>
+        <div class="row" *ngIf="user!=null">
+            <div class="center display">
+                <h1>@{{user.userName}}</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="center display">{{user.email}}</div>
+        </div>
+
+
+        <div class="row">
+            <div class="center">
+                <div class="center" data-bs-target="#followerList" data-bs-toggle="modal">
+                    <p class="count">{{followerCount}}</p>
+                    <p class="display">followers</p>
+                </div>
+
+                <div class="center" data-bs-target="#followingList" data-bs-toggle="modal">
+
+                    <p class="display">.</p>
+                    <p class="count">{{followingCount}}</p>
+                    <p class="display">following</p>
+
+                </div>
+            </div>
+
+            <div class="center" *ngIf="!isOwner && authService.getUserId()!=-1">
+                <button class="btn btn-primary" *ngIf="!isFollower" (click)="sendFollowRequest()">Follow</button>
+                <button class="btn btn-primary" *ngIf="isFollower" (click)="sendUnFollowRequest()">UnFollow</button>
+
+
+            </div>
+
+            <div class="col center">
+                <button class="btn btn-primay" (click)="clickedBoards()">Boards</button>
+            </div>
+            <div class="col center">
+                <button class="btn btn-primay" (click)="clickedPins()">Pins</button>
+            </div>
+        </div>
+
+    </div>
+    <div>
+
+        <div class="row lg-5 m-3" *ngIf="(fetchPins==false || pins==null)">
+            <div class="card-deck col-lg-4" *ngFor="let board of boardList" (click)="clickedBoard(board.boardId)">
+                <div class="card">
+                    <img class="card-img-top" [src]="'data:image/jpeg;base64,'+ board.boardPic"
+                        alt="{{board.description}}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{board.boardName}} </h5>
+                        <p class="card-text">{{board.pins.length}} pins</p>
+                        <p class="card-text"><small class="text-muted">{{board.lastUpdated | date}}</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="fetchPins">
+            <div class="card-deck col-lg-4 m-3" *ngFor="let pin of pins">
+                <div class="card" (click)="clickedPin(pin)" data-bs-target="#pinModal" data-bs-toggle="modal">
+                    <img class="card-img" [src]="'data:image/jpeg;base64,'+ pin.src" alt="{{pin.description}}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{pin.title}} </h5>
+                        <p class="card-text"><small class="text-muted">{{pin.dateCreated | date}}</small></p>
+                        <div class="row">
+                            <h3> {{pin.userName}}</h3>
+                            <h5>{{pin.description}}</h5>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div *ngIf="clickedPinComponent!=null" class="modal fade modal-center-aligned" id="pinModal" tabindex="-1"
+                role="dialog" aria-labelledby="ModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exmapleModalLabel">{{clickedPinComponent.title}}</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <img class="clickedComp" [src]="'data:image/jpeg;base64,'+ clickedPinComponent.src">
+                            <h5>{{clickedPinComponent.description}}</h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button *ngIf="clickedPinComponent.userId==authService.getUserId()" class="btn btn-danger" (click)="deletePin(clickedPinComponent.pinId)" >Delete</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade modal-center-aligned" id="followingList" tabindex="-1" role="dialog"
+                aria-labelledby="ModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Following List</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div *ngFor="let user of followingList">
+                                <div (Click)="redirectToUser(user.userId)">
+                                    <div class="img-list">
+                                        <img class="profile-img" [src]="'data:image/jpeg;base64,'+ user.profilePic">
+                                    </div>
+                                    <p>{{user.userName}}</p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+        </div>

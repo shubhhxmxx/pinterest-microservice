@@ -1,0 +1,80 @@
+<div class="container container-fluid mt-5 mb-3">
+    <div class="formBlock center">
+        <form [formGroup]="uploadPinForm">
+            <div class="row">
+                <div class="col-lg-3 offset-9">
+                    <select class="form-select form-select-sm" aria-label=".form-select-sm example"
+                        formControlName="boardId">
+                        <option selected>Select Board</option>
+                        <option *ngFor="let board of boardList" value={{board.boardId}}>{{board.boardName}}</option>
+
+                    </select>
+                    <button class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#createBoard">create
+                        new board</button>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="upload-container">
+                        <div class="border-container">
+                            <input type="file" (change)="uploadImage($event)">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="input-title mt-2 p-3">
+                        <input formControlName="title" class="input-title" placeholder="Enter Title"><br>
+                        <span class="display-info" *ngIf="uploadPinForm.controls['title'].dirty">
+                            The first 40 characters are what show up in feed.
+                        </span>
+                    </div>
+                    <div class="userDisplay col-lg-7 mt-3">
+                        <div class="ms-3 col-lg-3 img-logo">
+                            <img [src]="'data:image/jpeg;base64,'+ user.profilePic" alt="image">
+                        </div>
+                        <div class="display-userInfo col-lg-7 ">
+                            <p>{{user.userName}}</p>
+                            <p>{{noOfFollowers}} followers</p>
+                            <textarea class="descriptionArea mt-2" name="description" formControlName="description"
+                                id="description" cols="40" rows="3"
+                                placeholder="Tell us what your pin is about"></textarea>
+
+                            <label class="col mt-3" for="url">Enter your source url</label>
+                            <input formControlName="src" class="input">
+
+                            <div class="form-check form-switch mt-3">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
+                                    formControlName="isPrivate" value="checked? true:false;">
+                                <label class="form-check-label" for="flexSwitchCheckChecked">Private Pin</label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-pin-save m-2" (click)="createPin()">Save Pin</button>
+
+        </form>
+    </div>
+</div>
+
+<div class="modal fade" id="createBoard">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Create New Board</h3>
+            </div>
+
+            <div class="p-3 m-3 center">
+                <label for="boardName">enter Board Name</label>
+                <input class="ms-3" id="boardName" [(ngModel)]="boardName">
+                <button type="submit" (click)="createBoard()" class="btn btn-primary" data-bs-dismiss="modal">
+                    createBoard
+                </button>
+            </div>
+        </div>
+    </div>
+
+</div>

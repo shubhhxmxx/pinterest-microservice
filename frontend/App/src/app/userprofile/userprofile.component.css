@@ -1,0 +1,53 @@
+.profile-img{
+    width: 200px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    overflow: hidden;
+    margin-top: 30px;
+    box-shadow:rgba(0,0,0,0.35) 0px 5px 15px;  
+}
+
+.profile-img img {
+    width: 100%;
+    height: auto;
+}
+.center{
+    margin-top: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.count{
+    font-weight: bolder;
+}
+.display{
+    font-weight: bolder;
+    padding: 3px;
+}
+.card-text{
+    font-weight: lighter;
+}
+
+.img-list{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    overflow: hidden;
+    border: solid 1px;
+    box-shadow:rgba(0,0,0,0.35) 0px 5px 15px;  
+}
+.img-list img{
+    width: 100%;
+    height: auto;
+}
+
+.clickedComp img{
+    max-width: 800px;
+    max-height: 800px;
+}

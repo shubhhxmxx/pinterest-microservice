@@ -1,0 +1,83 @@
+<div class="container container-fluid ">
+    <div class="row" *ngIf="collaborateButton">
+        <div class="col offset-5 mt-2">
+            <button *ngIf="true" class="btn btn-primary"> Collaborate </button>
+        </div>
+    </div>    
+    <div class="row " >
+        <div class="card-deck col-lg-4 mt-3" *ngFor="let pin of pins"  data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <div class="card" (click)="clickedPin(pin)">
+                <img class="card-img-top" [src]="'data:image/jpeg;base64,'+ pin.src" alt="{{pin.description}}">
+                <div class="card-body">
+                    <h5 class="card-title">{{pin.title}} </h5>
+                    <p class="card-text"><small class="text-muted">{{pin.dateCreated | date}}</small></p>
+                </div>
+            </div>
+
+            <div  class="modal fade" *ngIf="clickedPinComponent!=null" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">{{clickedPinComponent.title}}</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <img [src]="'data:image/jpeg;base64,'+ clickedPinComponent.src">
+                        </div>
+                        <div class="modal-footer">
+                            <div *ngIf="enableEditButton">
+                                hello
+                            </div>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            
+        </div>
+    </div>
+    
+</div>
+
+<!--
+Button trigger modal
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Launch demo modal
+</button>
+
+-->
+<!-- Modal -->
+
+<!--
+
+    
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">{{pin.title}}</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+-->

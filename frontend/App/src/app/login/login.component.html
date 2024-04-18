@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="row m-3">
+        <div class="offset-1 col-10">
+            <h3 class="text-center">Welcome To Pinterest</h3>
+            <div class="row ">
+                <div class="offset-lg-3 col-lg-6 offset-md-2 col-md-8 offset-xs-1 col-xs-10 formBlock">
+                    <form [formGroup]="loginForm" class="form" (ngSubmit)="login()">
+                        <div class="form-group mb-3">
+                            <label for="email">Email</label><br>
+                            <input type="email" formControlName="email" id="email" placeholder="Enter your email" /><br>
+
+                        </div>
+
+
+                        <div class="form-group ">
+                            <label for="password">Password</label><br>
+                            <input type="password" formControlName="password" id="password"
+                                placeholder="Set up password" /><br>
+                            <span id="passwordError" class="text-danger"
+                                *ngIf="loginForm.controls['password'].dirty && loginForm.controls['password'].invalid">
+                                Sorry, Please provide valid Passowrd.
+                            </span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <a class="text-bold nav-link" [routerLink]="['/forgotPassword']">Forgot Password?</a>
+                        </div>
+
+
+
+                        <button type=submit class="btn"
+                            [disabled]="loginForm.pristine || loginForm.invalid">Login</button>
+                    </form>
+                    <span class="text-danger" *ngIf="errorMessage">
+                        {{errorMessage}}
+                    </span>
+
+                    <span class="text-success" *ngIf="successMessage">
+                        Login Success!
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

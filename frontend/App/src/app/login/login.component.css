@@ -1,0 +1,60 @@
+.formBlock{
+    border: 3px solid grey;
+    border-radius: 25px;
+    padding: 25px;
+}
+label{
+    font-weight: bold;
+}
+div.form-check-inline>lable{
+    font-weight: normal;
+}
+
+button, input[type=submit]{
+    color: white;
+    background-color: #D80032;
+    border-color: #3D0C11;
+    width: 100%;
+
+}
+button:hover,
+input[type=submit]:hover{
+    color:white;
+    background-color: #900C3F;
+    border-color: #900C3F;
+}
+button:disabled,
+input[type=submit]:disabled{
+    color:white;
+    background-color: #343a40;
+    border-color: #343a40;
+    cursor: not-allowed ! important;
+}
+
+.ng-dirty.ng-invalid:not(form){
+    border:3px solid red;
+}
+.ng-dirty.ng-invalid:not(form):focus{
+    border:3px solid red;
+}
+.ng-dirty.ng-valid:not(form){
+    border:3px solid #56b91c;
+}
+.ng-dirty.ng-valid:not(form):focus{
+    border:3px solid #56b91c;
+}
+div.text-success,
+div.text-danger,
+span.text-success,
+span.text-danger{
+    white-space: pre-line;
+}
+input{
+    width: 100%;
+}
+
+a.text-bold{
+    color:black;
+    font-weight: bolder;
+
+}

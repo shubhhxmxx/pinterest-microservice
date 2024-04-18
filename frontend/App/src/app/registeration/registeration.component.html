@@ -1,0 +1,87 @@
+<div class="container">
+    <div class="row m-3">
+        <div class="offset-1 col-10">
+            <h3 class="text-center">Welcome To Pinterest</h3>
+            <h5 class="text-center"> Find New Ideas to try! </h5>
+            <div class="row ">
+                <div class="offset-lg-3 col-lg-6 offset-md-2 col-md-8 offset-xs-1 col-xs-10 formBlock">
+                    <form [formGroup]="registerationForm" class="form" (ngSubmit) = "register()" >
+                        <div class="form-group m-3" (change)="uploadImage($event)">
+                            <label for="profile Pic">Profile Pic</label><br>
+                            <input type="file"  id="profilePic" /><br>
+                            <span id="profilePicError" class="text-danger"
+                            *ngIf="registerationForm.controls['userName'].dirty && registerationForm.controls['userName'].invalid"
+                            >
+                            Sorry, Unable to upload profile pic.
+                        </span>
+                        </div>
+                        <div class="form-group m-3">
+                            <label for="userName">UserName</label><br>
+                            <input type="text" formControlName="userName" id="userName" placeholder="Enter your Username"/><br>
+                            <span id="userNameError" class="text-danger"
+                            *ngIf="registerationForm.controls['userName'].dirty && registerationForm.controls['userName'].invalid"
+                            >
+                            Sorry, Please provide Username.
+                        </span>
+                        </div>
+                        <div class="form-group m-3">
+                            <label for="email">Email</label><br>
+                            <input type="email" formControlName="email" id="email" placeholder="Enter your Email Adress"/><br>
+                            <span id="emailError" class="text-danger"
+                            *ngIf="registerationForm.controls['email'].dirty && registerationForm.controls['email'].invalid"
+                            >
+                            Sorry, Please enter Valid Email.
+                        </span>
+                            <span id="emailExistsError" class="text-danger"
+                                *ngIf="errorMessage"
+                            >
+                                {{errorMessage}}
+                            </span>
+                        </div>
+                        
+                        <div class="form-group m-3">
+                            <label for="mobileNumber">Mobile Number</label><br>
+                            <input type="number" formControlName="mobileNumber" id="mobileNumber" placeholder="Enter your mobile Number"/><br>
+                            <span id="numberError" class="text-danger"
+                            *ngIf="registerationForm.controls['mobileNumber'].dirty && registerationForm.controls['mobileNumber'].invalid"
+                            >
+                            Sorry, Please provide valid mobileNumber
+                        </span>
+                        </div>
+
+                            
+                        <div class="form-group m-3">
+                            <label for="password">Password</label><br>
+                            <input type="password" formControlName="password" id="password" placeholder="Set up password"/><br>
+                            <span id="passwordError" class="text-danger"
+                            *ngIf="registerationForm.controls['password'].dirty && registerationForm.controls['password'].invalid"
+                            >
+                            Sorry, Please provide valid Passowrd.
+                        </span>
+                        </div>
+                        
+                        
+                        <div class="form-group m-3">
+                            <label for="confirmPassword">Confirm Password</label><br>
+                            <input type="password" formControlName="confirmPassword" id="confirmPassword" placeholder="Re enter password"><br>
+                            <span id="confirmPasswordError" class="text-danger"
+                            *ngIf=" registerationForm.controls['confirmPassword'].dirty && registerationForm.controls['confirmPassword'].value!=registerationForm.controls['password'].value"
+                            >
+                            Sorry, Passowrd does not match.
+                        </span>
+                        </div>
+
+                        <button type=submit class="btn" [disabled]="registerationForm.invalid || registerationForm.pristine" >Continue</button>
+                    </form>
+                    <div *ngIf="successMessage">
+                        <span class="text-success">
+                            User Registered SuccessFully.
+                        </span>
+
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
